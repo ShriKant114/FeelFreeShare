@@ -340,7 +340,7 @@
         });
     });
 
-    function uploadFile() {
+     function uploadFile() {
     let fileInput = document.getElementById('fileInput');
     let file = fileInput.files[0]; // Pehla selected file le rahe hain
 
@@ -348,12 +348,12 @@
         let fileSizeMB = file.size / (1024 * 1024); // Bytes → MB me convert kar rahe hain
 
         if (fileSizeMB > 100) {
-            alert("❌ Sirf 100MB tak ki file upload kar sakte ho!");
+            alert("❌ You can only upload files under 100 MB! Please upload again.");
+            fileInput.value = ""; // Input reset kar do
             return; // Upload process rok do
         }
 
-        alert("✅ File size is valid. Proceeding with upload...");
-        // Yahan AJAX ya FormData ka use karke file upload kar sakte ho
+       
     } else {
         alert("⚠️ Please select a file first!");
     }
