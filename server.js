@@ -287,8 +287,9 @@ app.get('/admin/data', (req, res) => {
           <td>${row.access_code}</td>
           <td>${row.date}</td>
           <td>${row.time}</td>
-          <td><a href="${row.download_link}" target="_blank">Download</a></td>
-        </tr>
+          <td><a href="${row.download_link}" target="_blank" style="text-decoration: none;">👁️</a></td>
+          <td> <button class="btn btn-danger btn-sm">🗑️ Delete</button></td>
+          </tr>
       `)
       .join('');
 
