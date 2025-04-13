@@ -363,9 +363,14 @@
         let fileSizeMB = file.size / (1024 * 1024); // Bytes → MB me convert kar rahe hain
 
         if (fileSizeMB > 100) {
-            alert("❌ you can only upload under 100 MB file ! upload Again");
+            alert("❌ You can only upload files under 100 MB! Please upload again.");
+            fileInput.value = ""; // Input reset kar do
             return; // Upload process rok do
-        } 
+        }
+
+       
+    } else {
+        alert("⚠️ Please select a file first!");
     }
 }
 
