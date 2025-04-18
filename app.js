@@ -30,14 +30,16 @@ app.get('/api/check-session', (req, res) => {
   });
   
 
-// Create the connection to the database
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: 'bf4k5ujn77nhxmqrb6ap-mysql.services.clever-cloud.com',
   user: 'ujaiefkewncnxf0c',
   password: 'MPrllhROIVMTk2z9a0Ug',
   database: 'bf4k5ujn77nhxmqrb6ap',
-  
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
+
 
 // Connect to the database
 db.connect((err) => {
