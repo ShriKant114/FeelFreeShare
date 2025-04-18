@@ -211,6 +211,18 @@
                     </li>
                 </div>
 
+
+                <div style="margin-left: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link admin-link" style="background-color: #51ff82; color: black;">
+                            <i class="" style="color:black" ;></i> <span class="admin-text">
+                            👁️ Visits: <span id="visitorCount" style="font-weight: bold; color: #4CAF50; color: black;">Loading...</span>
+                        </a>
+                    </li>
+                </div>
+
+
+
                 </ul>
             </div>
         </div>
@@ -248,7 +260,8 @@
                             <i class="fas fa-user"></i> Admin
                         </a>
                     </li>
-                    </daiv>
+                </div>
+                
             </ul>
         </div>
     </div>
@@ -354,6 +367,16 @@
         });
     });
 
+
+    fetch('http://localhost:3000/visit')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('visitorCount').innerText = data.count;
+      })
+      .catch(error => {
+        console.error('Error fetching visitor count:', error);
+        document.getElementById('visitorCount').innerText = 'Error';
+      });
 
     function uploadFile() {
     let fileInput = document.getElementById('fileInput');

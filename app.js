@@ -142,6 +142,29 @@ app.get('/admin', (req, res) => {
 
 
 
+// Function to increment visitor count
+const incrementVisitor = () => {
+  const updateQuery = 'UPDATE visitor_count SET count = count + 1 WHERE id = 1';
+  db.query(updateQuery, (err, result) => {
+    if (err) console.error('Failed to update visitor count:', err);
+  });
+};
+
+// API: Call this when page loads
+app.get('/visit', (req, res) => {
+  incrementVisitor();
+  db.query('SELECT count FROM visitor_count WHERE id = 1', (err, result) => {
+    if (err) {
+      res.status(500).send('Error fetching count');
+    } else {
+      res.json({ count: result[0].count });
+    }
+  });
+});
+
+
+
+
 
 
 
@@ -203,7 +226,7 @@ app.post('/uploads/file', (req, res) => {
 
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
-    const downloadLink = `https://feelfreeshare.onrender.com/uploads/${req.file.filename}`;
+    const downloadLink = `https://feelfreeshare.up.railway.app/uploads/${req.file.filename}`;
 
     const query = 'INSERT INTO file_data (file_name, access_code, date, time, download_link) VALUES (?, ?, ?, ?, ?)';
     db.query(query, [req.file.filename, req.accessCode, date, time, downloadLink], (err) => {
