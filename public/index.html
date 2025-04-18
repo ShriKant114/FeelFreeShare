@@ -368,7 +368,7 @@
     });
 
 
-    fetch('http://localhost:3000/visit')
+    fetch('https://feelfreeshare.up.railway.app/visit')
       .then(response => response.json())
       .then(data => {
         document.getElementById('visitorCount').innerText = data.count;
