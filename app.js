@@ -28,6 +28,12 @@ app.get('/api/check-session', (req, res) => {
       return res.json({ loggedIn: false });
     }
   });
+
+app.use((err, req, res, next) => {
+  console.error('Unexpected error:', err);
+  res.status(500).send('Something went wrong!');
+});
+
   
 
 const db = mysql.createPool({
@@ -41,14 +47,14 @@ const db = mysql.createPool({
 });
 
 
-// Connect to the database
-db.connect((err) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-   } else {
-    console.log('Connected to the database');
-  }
-});
+// // Connect to the database
+// db.connect((err) => {
+//   if (err) {
+//     console.error('Error connecting to the database:', err);
+//    } else {
+//     console.log('Connected to the database');
+//   }
+// });
 
 const validEmail = 'a@gmail.com';
 const validPassword = 'Shrikant@04';
