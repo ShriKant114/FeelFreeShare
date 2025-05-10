@@ -37,12 +37,12 @@ app.use((err, req, res, next) => {
   
 
 const db = mysql.createPool({
-  host: 'bf4k5ujn77nhxmqrb6ap-mysql.services.clever-cloud.com',
-  user: 'ujaiefkewncnxf0c',
-  password: 'MPrllhROIVMTk2z9a0Ug',
-  database: 'bf4k5ujn77nhxmqrb6ap',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10),
   queueLimit: 0
 });
 
@@ -56,8 +56,8 @@ const db = mysql.createPool({
 //   }
 // });
 
-const validEmail = 'a@gmail.com';
-const validPassword = 'Shrikant@04';
+const validEmail = process.env.VALID_EMAIL;
+const validPassword = process.env.VALID_PASSWORD;
 
 // Admin login page
 app.get('/admin_login', (req, res) => {
