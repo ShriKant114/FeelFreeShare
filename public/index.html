@@ -182,7 +182,7 @@
             </a>
 
             <!-- Desktop menu -->
-            <div class="collapse navbar-collapse" id="navbarNav" ">
+            <div class="collapse navbar-collapse" id="navbarNav ">
                 <ul class=" navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link active" style="color: black;" aria-current="page" href="/"><i
@@ -216,7 +216,8 @@
                     <li class="nav-item">
                         <a class="nav-link admin-link" style="background-color: #51ff82; color: black;">
                             <i class="" style="color:black" ;></i> <span class="admin-text">
-                            👁️ Visits: <span id="visitorCount" style="font-weight: bold; color: #4CAF50; color: black;">Loading...</span>
+                                👁️ Visits: <span id="visitorCount"
+                                    style="font-weight: bold; color: #4CAF50; color: black;">Loading...</span>
                         </a>
                     </li>
                 </div>
@@ -261,7 +262,7 @@
                         </a>
                     </li>
                 </div>
-                
+
             </ul>
         </div>
     </div>
@@ -312,18 +313,23 @@
                 <!-- Copyright (Left Side) -->
                 <div class="col-md-6 text-md-start  mb-2 mb-md-0" style="display: flex;">
                     <p class="mb-0">© 2025 FeelFree Share, Inc. All rights reserved. </p>
-                    <p style="margin-left: 2%;"><a href="/termcondition" style="text-decoration: none;">Terms of Use</a></p>
+                    <p style="margin-left: 2%;"><a href="/termcondition" style="text-decoration: none;">Terms of Use</a>
+                    </p>
                 </div>
 
                 <!-- Social Media Icons (Right Side) -->
                 <div class="col-md-6 text-md-end">
-                    <a href="https://twitter.com" class="text-dark me-3"><i class="bi bi-twitter"></i></a>
-                    <a href="https://www.instagram.com/shrikant_041?igsh=MTJ1ejRkYm1rdWY5cA==" class="text-dark me-3"><i
-                            class="bi bi-instagram"></i></a>
-                    <a href="https://facebook.com" class="text-dark me-3"><i class="bi bi-facebook"></i></a>
-                    <a href="https://www.linkedin.com/in/shrikant-kushwaha-669378255" class="text-dark me-3"><i
-                            class="bi bi-linkedin"></i></a>
-                    <a href="https://github.com/ShriKant114" class="text-dark"><i class="bi bi-github"></i></a>
+
+                    <a href="https://www.linkedin.com/in/shrikant-kushwaha-669378255" target="_blank"
+                        rel="noopener noreferrer" class="text-dark me-3"><i class="bi bi-linkedin"></i></a>
+
+                    <a href="https://www.instagram.com/shrikant_041?igsh=MTJ1ejRkYm1rdWY5cA==" target="_blank"
+                        rel="noopener noreferrer" class="text-dark me-3"><i class="bi bi-instagram"></i></a>
+
+
+                    <a href="https://github.com/ShriKant114" target="_blank" rel="noopener noreferrer"
+                        class="text-dark"><i class="bi bi-github"></i></a>
+
                     <br>
 
                 </div>
@@ -368,34 +374,34 @@
     });
 
 
-    fetch('https://feelfreeshare.up.railway.app/visit')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('visitorCount').innerText = data.count;
-      })
-      .catch(error => {
-        console.error('Error fetching visitor count:', error);
-        document.getElementById('visitorCount').innerText = 'Error';
-      });
+    fetch('https://feelfreeshare.shrikant.dev/visit')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('visitorCount').innerText = data.count;
+        })
+        .catch(error => {
+            console.error('Error fetching visitor count:', error);
+            document.getElementById('visitorCount').innerText = 'Error';
+        });
 
     function uploadFile() {
-    let fileInput = document.getElementById('fileInput');
-    let file = fileInput.files[0]; // Pehla selected file le rahe hain
+        let fileInput = document.getElementById('fileInput');
+        let file = fileInput.files[0]; // Pehla selected file le rahe hain
 
-    if (file) {
-        let fileSizeMB = file.size / (1024 * 1024); // Bytes → MB me convert kar rahe hain
+        if (file) {
+            let fileSizeMB = file.size / (1024 * 1024); // Bytes → MB me convert kar rahe hain
 
-        if (fileSizeMB > 100) {
-            alert("❌ You can only upload files under 100 MB! Please upload again.");
-            fileInput.value = ""; // Input reset kar do
-            return; // Upload process rok do
+            if (fileSizeMB > 100) {
+                alert("❌ You can only upload files under 100 MB! Please upload again.");
+                fileInput.value = ""; // Input reset kar do
+                return; // Upload process rok do
+            }
+
+
+        } else {
+            alert("⚠️ Please select a file first!");
         }
-
-       
-    } else {
-        alert("⚠️ Please select a file first!");
     }
-}
 
     $(document).ready(function () {
         // Handle form submission for file access using access code

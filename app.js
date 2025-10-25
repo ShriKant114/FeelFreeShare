@@ -14,10 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Session Middleware
+
 app.use(session({
-  secret: 'your-secret-key', // Choose a secret key for your session
+  secret: process.env.SESSION_SECRET, // env se session secret le raha hai
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false, // safer option
+  cookie: { secure: false } // HTTPS me true karna
 }));
 
 
@@ -42,22 +44,14 @@ const db = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   waitForConnections: true,
-  connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10),
+  connectionLimit: 10,
   queueLimit: 0
 });
 
 
-// // Connect to the database
-// db.connect((err) => {
-//   if (err) {
-//     console.error('Error connecting to the database:', err);
-//    } else {
-//     console.log('Connected to the database');
-//   }
-// });
-
 const validEmail = process.env.VALID_EMAIL;
 const validPassword = process.env.VALID_PASSWORD;
+
 
 // Admin login page
 app.get('/admin_login', (req, res) => {
@@ -234,7 +228,7 @@ app.post('/uploads/file', (req, res) => {
 
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
-    const downloadLink = `https://feelfreeshare.up.railway.app/uploads/${req.file.filename}`;
+    const downloadLink = `/uploads/${req.file.filename}`;
 
     const query = 'INSERT INTO file_data (file_name, access_code, date, time, download_link) VALUES (?, ?, ?, ?, ?)';
     db.query(query, [req.file.filename, req.accessCode, date, time, downloadLink], (err) => {
@@ -332,7 +326,6 @@ app.get('/admin/data', (req, res) => {
 // app.listen(PORT, () => {
 //   console.log(`Server is running on http://localhost:${PORT}`);
 // });
-
 
 
 app.listen(PORT, '0.0.0.0', () => {
