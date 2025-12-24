@@ -163,6 +163,26 @@
             outline: none !important;
             box-shadow: none !important;
         }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .blink-link {
+            animation: blink 1s infinite;
+        }
+
+        .blink-link:hover {
+            background-color: rgb(203, 0, 30);
+            color: black;
+        }
     </style>
 </head>
 
@@ -184,43 +204,45 @@
             <!-- Desktop menu -->
             <div class="collapse navbar-collapse" id="navbarNav ">
                 <ul class=" navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" style="color: black;" aria-current="page" href="/"><i
-                            class="fas fa-home"></i> Home</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" style="color: black;" href="/upload"><i class="fas fa-upload"></i> Uploads</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: black;" href="/access"><i class="fas fa-download"></i> Access</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: black;" href="/about"><i class="fas fa-info-circle"></i> About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: black;" href="/Contact"><i class="fas fa-envelope"></i>
-                        Contact</a>
-                </li>
-                <div style="margin-left: 10px;">
-                    <li class="nav-item">
-                        <a class="nav-link admin-link" href="/admin_login">
-                            <i class="fas fa-user" style="color:black" ;></i> <span class="admin-text"
-                                style="color:black" ;>Admin</span>
-                        </a>
+                    <li class="nav-item" ;>
+                        <a class="nav-link active blink-link hover-none" style="color: red;" aria-current="page"
+                            href="/linkshare"><i class="border-radius-2 border-color-blue"></i>LinkShare</a>
                     </li>
-                </div>
 
-
-                <div style="margin-left: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link admin-link" style="background-color: #51ff82; color: black;">
-                            <i class="" style="color:black" ;></i> <span class="admin-text">
-                                👁️ Visits: <span id="visitorCount"
-                                    style="font-weight: bold; color: #4CAF50; color: black;">Loading...</span>
-                        </a>
+                        <a class="nav-link active" style="color: black;" aria-current="page" href="/"><i
+                                class="fas fa-home"></i> Home</a>
                     </li>
-                </div>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" href="/about"><i class="fas fa-info-circle"></i>
+                            About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" href="/Contact"><i class="fas fa-envelope"></i>
+                            Contact</a>
+                    </li>
+                    <div style="margin-left: 10px;">
+                        <li class="nav-item">
+                            <a class="nav-link admin-link" href="/admin_login">
+                                <i class="fas fa-user" style="color:black" ;></i> <span class="admin-text"
+                                    style="color:black" ;>Admin</span>
+                            </a>
+                        </li>
+                    </div>
+
+
+                    <div style="margin-left: 10px;">
+                        <li class="nav-item">
+                            <a class="nav-link admin-link" style="background-color: #51ff82; color: black;">
+                                <i class="" style="color:black" ;></i> <span class="admin-text">
+                                    👁️ Visits: <span id="visitorCount"
+                                        style="font-weight: bold; color: #4CAF50; color: black;">Loading...</span>
+                            </a>
+                        </li>
+                    </div>
 
 
 
@@ -237,16 +259,18 @@
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav" style="font-size: large" ;>
+
+
+                <li class="nav-item " style="width: 100px" ;>
+                    <a class="nav-link active blink-link hover-none" style="color: red;" aria-current="page"
+                        href="/linkshare"><i class="border-radius-2 border-color-blue"></i>LinkShare</a>
+                </li>
+
                 <li class="nav-item" style="width: 100px" ;>
                     <a class="nav-link" href="/"><i class="fas fa-home"></i> <span>Home</span></a>
                 </li>
 
-                <li class="nav-item" style="width: 100px" ;>
-                    <a class="nav-link" href="/upload"><i class="fas fa-upload"></i> Uploads</a>
-                </li>
-                <li class="nav-item" style="width: 100px" ;>
-                    <a class="nav-link" href="/access"><i class="fas fa-download"></i> Access</a>
-                </li>
+
                 <li class="nav-item" style="width: 100px" ;>
                     <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
                 </li>
@@ -273,7 +297,7 @@
         <div class="row py-2 rounded">
             <h4 class="fw-bold" style="color:#ffcd86;">No doubts. No delays. Just secure sharing.</h4>
         </div>
-        
+
         <div class="row">
             <div class="col-md-6 upload-section section">
                 <h2 style="font-weight: bold;">Upload Files</h2>
@@ -444,5 +468,3 @@
 
 
 </html>
-
-

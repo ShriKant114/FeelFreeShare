@@ -24,19 +24,19 @@ app.use(session({
 
 
 app.get('/api/check-session', (req, res) => {
-    if (req.session.isAdmin) {
-      return res.json({ loggedIn: true });
-    } else {
-      return res.json({ loggedIn: false });
-    }
-  });
+  if (req.session.isAdmin) {
+    return res.json({ loggedIn: true });
+  } else {
+    return res.json({ loggedIn: false });
+  }
+});
 
 app.use((err, req, res, next) => {
   console.error('Unexpected error:', err);
   res.status(500).send('Something went wrong!');
 });
 
-  
+
 
 const db = mysql.createPool({
   host: process.env.DB_HOST,
@@ -49,6 +49,10 @@ const db = mysql.createPool({
 });
 
 
+const linkshareRouter = require('./linkshare');
+app.use('/', linkshareRouter);
+
+
 const validEmail = process.env.VALID_EMAIL;
 const validPassword = process.env.VALID_PASSWORD;
 
@@ -56,6 +60,12 @@ const validPassword = process.env.VALID_PASSWORD;
 // Admin login page
 app.get('/admin_login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+// linkshare rout
+
+app.get('/linkshare', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'linkshare.html'));
 });
 
 //uploaads rout
@@ -118,7 +128,7 @@ app.post('/logout', (req, res) => {
 
     // Prevent back button from accessing previous session pages
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-    
+
     res.redirect('/admin_login');
   });
 });
@@ -209,7 +219,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ 
+const upload = multer({
   storage,
   limits: { fileSize: 100 * 1024 * 1024 }, // 100MB limit
 });
@@ -323,11 +333,9 @@ app.get('/admin/data', (req, res) => {
 
 // Start the server
 
-// app.listen(PORT, () => {
-//   console.log(`Server is running on http://localhost:${PORT}`);
-// });
-
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log("Server is running on http://0.0.0.0:3000");
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
