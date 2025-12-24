@@ -16,39 +16,49 @@ const db = mysql.createPool({
 
 const PORT = process.env.PORT || 3000;
 
-// Upload link
 router.post('/upload', (req, res) => {
   const { link } = req.body;
+
   if (!link) {
     return res.json({ success: false, message: 'Link is required' });
   }
 
-  // Generate unique 4-digit code
-  let code;
-  do {
-    code = Math.floor(1000 + Math.random() * 9000);
-  } while (false); // In real app, check uniqueness
+  // Generate 4-digit access code
+  const code = Math.floor(1000 + Math.random() * 9000);
 
   const date = new Date().toISOString().split('T')[0];
   const time = new Date().toTimeString().split(' ')[0];
 
-  db.query('INSERT INTO link_data (copy_link, access_code, date, time) VALUES (?, ?, ?, ?)', [link, code, date, time], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.json({ success: false, message: 'Database error' });
-    }
-
-    // Generate QR code for the access URL
-    const accessUrl = `https://feelfreeshare.shrikant.dev/${PORT}/link-access?code=${code}`;
-    qr.toDataURL(accessUrl, (err, qrCodeData) => {
+  db.query(
+    'INSERT INTO link_data (copy_link, access_code, date, time) VALUES (?, ?, ?, ?)',
+    [link, code, date, time],
+    (err) => {
       if (err) {
         console.error(err);
-        return res.json({ success: true, code, message: 'Link uploaded, but QR failed' });
+        return res.json({ success: false, message: 'Database error' });
       }
-      res.json({ success: true, code, qrCode: qrCodeData });
-    });
-  });
+
+      // ✅ QR code me direct uploaded link
+      qr.toDataURL(link, (err, qrCodeData) => {
+        if (err) {
+          console.error(err);
+          return res.json({
+            success: true,
+            code,
+            message: 'Link saved but QR generation failed'
+          });
+        }
+
+        res.json({
+          success: true,
+          code,
+          qrCode: qrCodeData
+        });
+      });
+    }
+  );
 });
+
 
 // Access link
 router.get('/link-access', (req, res) => {
