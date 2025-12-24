@@ -39,7 +39,7 @@ router.post('/upload', (req, res) => {
     }
 
     // Generate QR code for the access URL
-    const accessUrl = `http://localhost:${PORT}/link-access?code=${code}`;
+    const accessUrl = `https://feelfreeshare.shrikant.dev/${PORT}/link-access?code=${code}`;
     qr.toDataURL(accessUrl, (err, qrCodeData) => {
       if (err) {
         console.error(err);

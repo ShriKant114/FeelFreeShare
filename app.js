@@ -9,6 +9,8 @@ const mysql = require('mysql2');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const weblink = "https://feelfreeshare.shrikant.dev/";
+
 // Middleware to parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -238,7 +240,8 @@ app.post('/uploads/file', (req, res) => {
 
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
-    const downloadLink = `/uploads/${req.file.filename}`;
+    const downloadLink = `${weblink}uploads/${req.file.filename}`;
+    
 
     const query = 'INSERT INTO file_data (file_name, access_code, date, time, download_link) VALUES (?, ?, ?, ?, ?)';
     db.query(query, [req.file.filename, req.accessCode, date, time, downloadLink], (err) => {
